@@ -40,6 +40,15 @@ spec:
               key: SECRET_KEY
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+        - name: config
+          mountPath: /app/configs
+          readOnly: true
+        - name: secret
+          mountPath: /app/secrets
+          readOnly: true
         livenessProbe:
           httpGet:
             path: api/health
@@ -52,3 +61,13 @@ spec:
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 5
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: todoapp-pvc
+      - name: config
+        configMap:
+          name: app-config
+      - name: secret
+        secret:
+          secretName: app-secret
