@@ -7,7 +7,7 @@ INFRA_DIR="$(dirname "$0")/.infrastructure"
 kubectl apply -f "$INFRA_DIR/namespace.yml"
 
 # configuration the deployment mounts
-kubectl apply -f "$INFRA_DIR/confgiMap.yml"
+kubectl apply -f "$INFRA_DIR/configMap.yml"
 kubectl apply -f "$INFRA_DIR/secret.yml"
 
 # storage: PV (cluster-wide) and then the PVC that claims it
